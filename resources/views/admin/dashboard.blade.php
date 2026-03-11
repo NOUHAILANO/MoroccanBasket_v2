@@ -1,63 +1,65 @@
 @extends('layouts.admin')
 
 @section('content')
-<div style="padding: 10px;">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
-        <h2 style="font-family: 'Playfair Display', serif; margin: 0; color: #333;">Tableau de Bord</h2>
-        <span style="color: #888; font-size: 14px;">{{ now()->format('d/m/2026') }}</span>
+<div style="padding: 40px 5%; font-family: 'Poppins', sans-serif;">
+    
+    <div style="margin-bottom: 40px;">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 32px; margin: 0;">Tableau de Bord</h2>
+        <p style="color: #888;">Bienvenue dans la gestion de MoroccanBasket.</p>
     </div>
 
-    <div style="display: flex; gap: 20px; margin-bottom: 40px;">
-        <div style="flex: 1; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-left: 5px solid #3498db;">
-            <h4 style="margin: 0; color: #3498db; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">Total Produits</h4>
-            <h2 style="margin: 15px 0 0 0; font-size: 32px;">{{ $totalProduits }}</h2>
-        </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 40px;">
         
-        <div style="flex: 1; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-left: 5px solid #27ae60;">
-            <h4 style="margin: 0; color: #27ae60; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">Valeur Stock</h4>
-            <h2 style="margin: 15px 0 0 0; font-size: 32px;">{{ number_format($valeurStock, 2) }} DH</h2>
+        <div style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-top: 4px solid #b58d67;">
+            <h4 style="color: #888; font-size: 13px; margin: 0;">TOTAL PRODUITS</h4>
+            <p style="font-size: 28px; font-weight: 700; margin: 10px 0;">{{ $totalProduits }}</p>
         </div>
 
-        <div style="flex: 1; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-left: 5px solid #e67e22;">
-            <h4 style="margin: 0; color: #e67e22; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">Catégories</h4>
-            <h2 style="margin: 15px 0 0 0; font-size: 32px;">{{ $totalCategories }}</h2>
+        <div style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-top: 4px solid #3498db;">
+            <h4 style="color: #888; font-size: 13px; margin: 0;">CATÉGORIES</h4>
+            <p style="font-size: 28px; font-weight: 700; margin: 10px 0;">{{ $totalCategories }}</p>
+        </div>
+
+        <div style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-top: 4px solid #27ae60;">
+            <h4 style="color: #888; font-size: 13px; margin: 0;">VALEUR DU STOCK</h4>
+            <p style="font-size: 28px; font-weight: 700; margin: 10px 0; color: #27ae60;">{{ number_format($valeurStock, 2) }} DH</p>
+        </div>
+
+        <div style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-top: 4px solid #e74c3c;">
+            <h4 style="color: #888; font-size: 13px; margin: 0;">PRODUITS EN ALERTE</h4>
+            <p style="font-size: 28px; font-weight: 700; margin: 10px 0; color: #e74c3c;">{{ $stockFaible->count() }}</p>
         </div>
     </div>
 
-    <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
-            <h3 style="margin: 0; font-family: 'Playfair Display', serif; color: #e74c3c;">⚠️ Alertes Stock Faible (≤ 5)</h3>
-            <a href="{{ route('products.index') }}" style="color: #3498db; text-decoration: none; font-size: 14px; font-weight: 600;">Tout gérer</a>
+    <div style="background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); overflow: hidden;">
+        <div style="padding: 20px; border-bottom: 1px solid #eee; background: #fdfaf7;">
+            <h3 style="margin: 0; font-size: 18px; color: #b58d67;">⚠️ Liste des stocks à surveiller</h3>
         </div>
-
         <table style="width: 100%; border-collapse: collapse;">
             <thead>
-                <tr style="background: #fdfdfd; text-align: left; border-bottom: 2px solid #eee;">
-                    <th style="padding: 15px; color: #888; font-weight: 600;">Nom du Produit</th>
-                    <th style="padding: 15px; color: #888; font-weight: 600;">Catégorie</th>
-                    <th style="padding: 15px; color: #888; font-weight: 600;">Stock</th>
-                    <th style="padding: 15px; color: #888; font-weight: 600;">Action</th>
+                <tr style="text-align: left; background: #f9f9f9; font-size: 14px; color: #666;">
+                    <th style="padding: 15px;">Produit</th>
+                    <th style="padding: 15px;">Catégorie</th>
+                    <th style="padding: 15px;">Stock Restant</th>
+                    <th style="padding: 15px;">Action</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse($stockFaible as $p)
-                <tr style="border-bottom: 1px solid #f9f9f9;">
-                    <td style="padding: 15px; font-weight: 500;">{{ $p->nom }}</td>
-                    <td style="padding: 15px;"><span style="background: #eee; padding: 4px 10px; border-radius: 20px; font-size: 12px;">{{ $p->category->nom }}</span></td>
-                    <td style="padding: 15px; color: #e74c3c; font-weight: bold;">{{ $p->stock }}</td>
-                    <td style="padding: 15px;">
-                        <a href="{{ route('products.edit', $p->id) }}" style="background: #3498db; color: white; padding: 6px 12px; text-decoration: none; border-radius: 4px; font-size: 12px;">Modifier</a>
-                    </td>
+                @forelse($stockFaible as $item)
+                <tr style="border-bottom: 1px solid #eee;">
+                    <td style="padding: 15px; font-weight: 600;">{{ $item->nom }}</td>
+                    <td style="padding: 15px;">{{ $item->category->nom ?? 'N/A' }}</td>
+                    <td style="padding: 15px;"><span style="color: #e74c3c; font-weight: bold;">{{ $item->stock }}</span></td>
+                    <td style="padding: 15px;"><a href="{{ route('products.edit', $item->id) }}" style="color: #3498db; text-decoration: none; font-size: 14px;">Réapprovisionner</a></td>
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="4" style="padding: 40px; text-align: center; color: #27ae60; font-weight: 600;">
-                        ✨ Félicitations ! Tous les produits sont bien approvisionnés.
-                    </td>
+                    <td colspan="4" style="padding: 30px; text-align: center; color: #aaa;">✅ Tout le stock est suffisant !</td>
                 </tr>
                 @endforelse
             </tbody>
         </table>
     </div>
+
 </div>
 @endsection
