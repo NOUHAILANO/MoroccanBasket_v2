@@ -3,7 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProductController;
-
+use App\Http\Controllers\ShopController;
+use App\Http\Controllers\Admin\DashboardController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -21,4 +22,6 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('admin/products', ProductController::class);
 
+Route::get('/shop/{id}', [ShopController::class, 'show'])->name('shop.show');
+Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 require __DIR__.'/auth.php';
