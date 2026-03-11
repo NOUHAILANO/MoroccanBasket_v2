@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Auth\Middleware\RedirectIfAuthenticated; // Importation l-mohimma
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Hna ghadi n-faksiw l-mouchkil dyal Redirect
+        RedirectIfAuthenticated::redirectUsing(fn () => route('admin.dashboard'));
     }
 }

@@ -1,27 +1,43 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\ShopController;
 use App\Http\Controllers\Admin\DashboardController;
-Route::get('/', function () {
-    return view('welcome');
+use App\Http\Controllers\ShopController;
+use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+|  PARTIE CLIENT (Vitrine) - Public
+|--------------------------------------------------------------------------
+*/
+Route::get('/', [ShopController::class, 'index'])->name('shop.index');
+Route::get('/product/{id}', [ShopController::class, 'show'])->name('shop.show');
+
+/*
+|--------------------------------------------------------------------------
+|  PARTIE ADMIN (Ton rôle de Dev A) - Protégée par Auth
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
+    
+    // Le Dashboard (Statistiques)
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    
+    // Le CRUD complet des produits
+    Route::resource('products', ProductController::class);
+    
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
+/*
+|--------------------------------------------------------------------------
+|  PARTIE PROFIL (Breeze par défaut)
+|--------------------------------------------------------------------------
+*/
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
-Route::resource('admin/products', ProductController::class);
-
-Route::get('/shop/{id}', [ShopController::class, 'show'])->name('shop.show');
-Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 require __DIR__.'/auth.php';

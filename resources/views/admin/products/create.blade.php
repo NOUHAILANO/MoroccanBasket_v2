@@ -1,59 +1,45 @@
-<div class="container" style="max-width: 600px; margin: 20px auto; font-family: sans-serif;">
-    <h2>Ajouter un Produit - Moroccan Basket</h2>
+<div style="padding: 40px; max-width: 800px; margin: auto; font-family: sans-serif;">
+    <h2 style="border-bottom: 2px solid #b58d67; padding-bottom: 10px;">Ajouter un Nouveau Panier</h2>
 
-    <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data" style="margin-top: 20px;">
         @csrf
-        
-        @if ($errors->any())
-            <div style="color: red; margin-bottom: 15px;">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
         <div style="margin-bottom: 15px;">
-            <label style="display: block;">Nom du produit</label>
-            <input type="text" name="nom" value="{{ old('nom') }}" required style="width: 100%; padding: 8px;">
+            <label>Nom du Panier :</label><br>
+            <input type="text" name="nom" required style="width: 100%; padding: 8px; border: 1px solid #ccc;">
         </div>
 
         <div style="margin-bottom: 15px;">
-            <label style="display: block;">Catégorie</label>
-            <select name="category_id" style="width: 100%; padding: 8px;">
-                <option value="">-- Sélectionner --</option>
-                @foreach($categories as $category)
-                    <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
-                        {{ $category->nom }}
-                    </option>
+            <label>Description :</label><br>
+            <textarea name="description" required style="width: 100%; padding: 8px; border: 1px solid #ccc; height: 100px;"></textarea>
+        </div>
+
+        <div style="display: flex; gap: 20px; margin-bottom: 15px;">
+            <div style="flex: 1;">
+                <label>Prix (DH) :</label>
+                <input type="number" name="prix" step="0.01" required style="width: 100%; padding: 8px; border: 1px solid #ccc;">
+            </div>
+            <div style="flex: 1;">
+                <label>Stock :</label>
+                <input type="number" name="stock" required style="width: 100%; padding: 8px; border: 1px solid #ccc;">
+            </div>
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <label>Catégorie :</label>
+            <select name="category_id" required style="width: 100%; padding: 8px; border: 1px solid #ccc;">
+                @foreach($categories as $cat)
+                    <option value="{{ $cat->id }}">{{ $cat->nom }}</option>
                 @endforeach
             </select>
         </div>
 
-        <div style="margin-bottom: 15px;">
-            <label style="display: block;">Description</label>
-            <textarea name="description" style="width: 100%; padding: 8px; height: 100px;">{{ old('description') }}</textarea>
-        </div>
-
-        <div style="display: flex; gap: 10px; margin-bottom: 15px;">
-            <div style="flex: 1;">
-                <label style="display: block;">Prix (DH)</label>
-                <input type="number" step="0.01" name="prix" value="{{ old('prix') }}" style="width: 100%; padding: 8px;">
-            </div>
-            <div style="flex: 1;">
-                <label style="display: block;">Stock</label>
-                <input type="number" name="stock" value="{{ old('stock') }}" style="width: 100%; padding: 8px;">
-            </div>
-        </div>
-
         <div style="margin-bottom: 20px;">
-            <label style="display: block;">Image du produit</label>
-            <input type="file" name="image" style="width: 100%;">
+            <label>Image du Panier :</label><br>
+            <input type="file" name="image" required style="margin-top: 5px;">
         </div>
 
-        <button type="submit" style="background: #2c3e50; color: white; padding: 10px 20px; border: none; cursor: pointer; width: 100%;">
-            Enregistrer le produit
+        <button type="submit" style="background: #b58d67; color: white; padding: 12px 30px; border: none; cursor: pointer; border-radius: 5px;">
+            Enregistrer le Produit
         </button>
     </form>
 </div>
