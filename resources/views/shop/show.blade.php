@@ -1,4 +1,7 @@
-<div style="max-width: 1100px; margin: 50px auto; padding: 20px; font-family: 'Segoe UI', sans-serif;">
+@extends('layouts.app')
+
+@section('content')
+<div style="max-width: 1100px; margin: 50px auto; padding: 20px; font-family: 'Poppins', sans-serif;">
     <div style="display: flex; gap: 50px; flex-wrap: wrap;">
         
         <div style="flex: 1; min-width: 350px;">
@@ -10,7 +13,7 @@
             <p style="color: #b58d67; text-transform: uppercase; letter-spacing: 2px; font-weight: bold; margin-bottom: 10px;">
                 {{ $product->category->nom }}
             </p>
-            <h1 style="font-size: 36px; margin: 0 0 20px 0; color: #333;">{{ $product->nom }}</h1>
+            <h1 style="font-size: 36px; margin: 0 0 20px 0; color: #333; font-family: 'Playfair Display', serif;">{{ $product->nom }}</h1>
             
             <p style="font-size: 24px; color: #b58d67; font-weight: bold; margin-bottom: 30px;">
                 {{ number_format($product->prix, 2) }} DH
@@ -21,7 +24,7 @@
                 <p>{{ $product->description }}</p>
             </div>
 
-            <form action="#" method="POST">
+            <form action="{{ route('cart.add', $product->id) }}" method="POST">
                 @csrf
                 <div style="margin-bottom: 20px;">
                     <label style="display: block; margin-bottom: 8px; font-weight: bold;">Quantité :</label>
@@ -43,3 +46,4 @@
 
     </div>
 </div>
+@endsection

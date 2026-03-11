@@ -19,6 +19,7 @@ Route::get('/product/{id}', [ShopController::class, 'show'])->name('shop.show');
 |  PARTIE ADMIN (Ton rôle de Dev A) - Protégée par Auth
 |--------------------------------------------------------------------------
 */
+
 Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     
     // Le Dashboard (Statistiques)
@@ -39,5 +40,5 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
+Route::get('/cart', function () { return view('cart.index'); });
 require __DIR__.'/auth.php';
