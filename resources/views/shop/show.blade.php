@@ -2,18 +2,30 @@
 
 @section('content')
 <div style="max-width: 1100px; margin: 50px auto; padding: 20px; font-family: 'Poppins', sans-serif;">
+    
+    {{-- Message de succès mlli t-cliqui 3la ajouter --}}
+    @if(session('success'))
+        <div style="background: #d4edda; color: #155724; padding: 15px; border-radius: 4px; margin-bottom: 20px;">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <div style="display: flex; gap: 50px; flex-wrap: wrap;">
         
+        {{-- Image du produit --}}
         <div style="flex: 1; min-width: 350px;">
             <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->nom }}" 
                  style="width: 100%; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
         </div>
 
+        {{-- Infos du produit --}}
         <div style="flex: 1; min-width: 350px;">
             <p style="color: #b58d67; text-transform: uppercase; letter-spacing: 2px; font-weight: bold; margin-bottom: 10px;">
-                {{ $product->category->nom }}
+                {{ $product->category->nom ?? 'Produit' }}
             </p>
-            <h1 style="font-size: 36px; margin: 0 0 20px 0; color: #333; font-family: 'Playfair Display', serif;">{{ $product->nom }}</h1>
+            <h1 style="font-size: 36px; margin: 0 0 20px 0; color: #333; font-family: 'Playfair Display', serif;">
+                {{ $product->nom }}
+            </h1>
             
             <p style="font-size: 24px; color: #b58d67; font-weight: bold; margin-bottom: 30px;">
                 {{ number_format($product->prix, 2) }} DH
@@ -24,6 +36,7 @@
                 <p>{{ $product->description }}</p>
             </div>
 
+            {{-- Formulaire Ajouter au Panier --}}
             <form action="{{ route('cart.add', $product->id) }}" method="POST">
                 @csrf
                 <div style="margin-bottom: 20px;">
@@ -43,7 +56,6 @@
                 ← Retour à la boutique
             </a>
         </div>
-
     </div>
 </div>
 @endsection
