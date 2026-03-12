@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,11 +17,32 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // 1. Create Categories
 
+        $artisanat = Category::firstOrCreate(
+            ['nom' => 'Artisanat'],
+            ['slug' => Str::slug('Artisanat')]
+        );
+
+        $soins = Category::firstOrCreate(
+            ['nom' => 'Soins Naturels'],
+            ['slug' => Str::slug('Soins Naturels')]
+        );
+        $this->command->info('Categories created successfully!');
+
+        // 2. Call the Product Seeder
+        // This ensures products are created AFTER categories
+        $this->call([
+            ProductSeeder::class,
+        ]);
+
+
+        // 3. Create a Test Admin (Optional but helpful for Dev B)
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => 'Admin User',
+            'email' => 'admin@moroccanbasket.com',
+            'role' => 'admin',
+            'password' => bcrypt('password'),
         ]);
     }
 }
