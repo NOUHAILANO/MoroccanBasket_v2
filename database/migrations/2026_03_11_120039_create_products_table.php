@@ -15,7 +15,7 @@ return new class extends Migration
         $table->id();
         $table->string('nom');
         $table->text('description');
-        $table->decimal('prix', 8, 2); // 8 chiffres au total, 2 après la virgule
+        $table->decimal('price', 8, 2); // 8 chiffres au total, 2 après la virgule
         $table->integer('stock')->default(0);
         $table->string('image')->nullable(); // On autorise le vide au début
         

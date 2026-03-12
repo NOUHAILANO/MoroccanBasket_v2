@@ -34,7 +34,7 @@ class ProductSeeder extends Seeder
             [
                 'nom' => 'Organic Argan Oil',
                 'description' => 'Pure, cold-pressed oil for hair and skin hydration.',
-                'prix' => 200,
+                'price' => 200,
                 'image' => 'products/argan.jpg',
                 'category_id' => $soins->id,
                 'stock' => 10,
@@ -42,7 +42,7 @@ class ProductSeeder extends Seeder
             [
                 'nom' => 'Moroccan Amlou Spread',
                 'description' => 'A delicious blend of toasted almonds, argan oil, and honey.',
-                'prix' => 85,
+                'price' => 85,
                 'image' => 'products/amlou.jpg',
                 'category_id' => $soins->id,
                 'stock' => 30,
@@ -50,7 +50,7 @@ class ProductSeeder extends Seeder
             [
                 'nom' => 'Traditional Sabon Beldi',
                 'description' => 'Natural black soap made from olive oil for deep exfoliation.',
-                'prix' => 65,
+                'price' => 65,
                 'image' => 'products/sabon_beldi.jpg',
                 'category_id' => $soins->id,
                 'stock' => 50,
@@ -58,7 +58,7 @@ class ProductSeeder extends Seeder
             [
                 'nom' => 'Rose Water Mist',
                 'description' => 'Refreshing and soothing floral water from the Valley of Roses.',
-                'prix' => 110,
+                'price' => 110,
                 'image' => 'products/eau_rose.jpg',
                 'category_id' => $soins->id,
                 'stock' => 25,
@@ -66,7 +66,7 @@ class ProductSeeder extends Seeder
             [
                 'nom' => 'Hammam Kessa Glove',
                 'description' => 'Traditional exfoliating glove for a smooth, glowing skin.',
-                'prix' => 40,
+                'price' => 40,
                 'image' => 'products/kessa.jpg',
                 'category_id' => $soins->id,
                 'stock' => 100,
@@ -74,7 +74,7 @@ class ProductSeeder extends Seeder
             [
                 'nom' => 'Akar Fassi Powder',
                 'description' => 'Natural pigment made from dried poppy petals and pomegranate bark.',
-                'prix' => 90,
+                'price' => 90,
                 'image' => 'products/akar_fassi.jpg',
                 'category_id' => $soins->id,
                 'stock' => 20,
@@ -84,7 +84,7 @@ class ProductSeeder extends Seeder
             [
                 'nom' => 'Traditional Tagine Pot',
                 'description' => 'Authentic clay pot for slow-cooking traditional Moroccan dishes.',
-                'prix' => 180,
+                'price' => 180,
                 'image' => 'products/tajine.jpg',
                 'category_id' => $artisanat->id,
                 'stock' => 5,
@@ -92,7 +92,7 @@ class ProductSeeder extends Seeder
             [
                 'nom' => 'Atlas Spices Blend',
                 'description' => 'A unique mix of aromatic spices sourced from the Atlas Mountains.',
-                'prix' => 95,
+                'price' => 95,
                 'image' => 'products/epices_atlas.jpg',
                 'category_id' => $artisanat->id,
                 'stock' => 15,
@@ -100,7 +100,7 @@ class ProductSeeder extends Seeder
             [
                 'nom' => 'Decorative Tagine',
                 'description' => 'Hand-painted ceramic tagine for serving or decoration.',
-                'prix' => 150,
+                'price' => 150,
                 'image' => 'products/tajine_deco.jpg',
                 'category_id' => $artisanat->id,
                 'stock' => 8,
@@ -108,7 +108,7 @@ class ProductSeeder extends Seeder
             [
                 'nom' => 'Embroidered Tarbouche',
                 'description' => 'Classic red Moroccan hat with traditional embroidery.',
-                'prix' => 210,
+                'price' => 210,
                 'image' => 'products/tarbouche.jpg',
                 'category_id' => $artisanat->id,
                 'stock' => 4,
@@ -116,7 +116,7 @@ class ProductSeeder extends Seeder
             [
                 'nom' => 'Zlafa Moroccan Bowl',
                 'description' => 'Ceramic bowl with traditional patterns, perfect for Harira soup.',
-                'prix' => 130,
+                'price' => 130,
                 'image' => 'products/zlafa.jpg',
                 'category_id' => $artisanat->id,
                 'stock' => 12,
@@ -124,7 +124,7 @@ class ProductSeeder extends Seeder
             [
                 'nom' => 'Artisanal Teapot Set',
                 'description' => 'Complete hand-carved silver teapot set for traditional tea service.',
-                'prix' => 380,
+                'price' => 380,
                 'image' => 'products/service_the.jpg',
                 'category_id' => $artisanat->id,
                 'stock' => 2,

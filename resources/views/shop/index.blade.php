@@ -51,7 +51,7 @@
 
                 <p style="color: #b58d67; font-size: 18px; font-weight: bold; margin-bottom: 20px; font-family: 'Poppins', sans-serif;">
 
-                    {{ number_format($product->prix, 2) }} DH
+                    {{ number_format($product->price, 2) }} DH
 
                 </p>
 
