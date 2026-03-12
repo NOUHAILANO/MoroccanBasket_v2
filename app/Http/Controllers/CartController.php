@@ -21,7 +21,7 @@ class CartController extends Controller
         return view('cart.index', compact('cart', 'total'));
     }
 
-    public function addToCart(Request $request, $id)
+    public function add(Request $request, $id)
     {
         $product = Product::findOrFail($id);
         $cart = session()->get('cart', []);
@@ -55,7 +55,7 @@ class CartController extends Controller
         return view('cart.index', compact('cart', 'total'));
     }
 
-    public function removeFromCart(Request $request)
+    public function remove(Request $request)
     {
         if ($request->id) {
             $cart = session()->get('cart');
@@ -63,7 +63,7 @@ class CartController extends Controller
                 unset($cart[$request->id]);
                 session()->put('cart', $cart);
             }
-            return response()->json(['success' => 'Produit retiré !']);
+            return redirect()->back()->with('success', 'Produit retiré !');
         }
     }
 }
