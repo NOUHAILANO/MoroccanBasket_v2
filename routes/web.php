@@ -7,10 +7,11 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\OrderController; // <--- N'oubliez pas l'import !
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
-|  PARTIE CLIENT (Vitrine) - Public
+| 1. PARTIE PUBLIQUE (Vitrine)
 |--------------------------------------------------------------------------
 */
 
@@ -53,7 +54,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 });
 /*
 |--------------------------------------------------------------------------
-|  PARTIE PROFIL
+| 4. PROFIL & AUTH
 |--------------------------------------------------------------------------
 */
 Route::middleware('auth')->group(function () {
