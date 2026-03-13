@@ -41,7 +41,7 @@ public function index(Request $request)
         $validated = $request->validate([
             'nom' => 'required|max:255',
             'description' => 'required',
-            'prix' => 'required|numeric',
+            'price' => 'required|numeric',
             'stock' => 'required|integer',
             'category_id' => 'required|exists:categories,id',
             'image' => 'nullable|image|max:2048',
@@ -66,7 +66,7 @@ public function index(Request $request)
         $validated = $request->validate([
             'nom' => 'required|max:255',
             'description' => 'nullable', // Zdna hadi bach may-t-bloquach
-            'prix' => 'required|numeric',
+            'price' => 'required|numeric',
             'stock' => 'required|integer',
             'category_id' => 'required|exists:categories,id',
             'image' => 'nullable|image|max:2048',

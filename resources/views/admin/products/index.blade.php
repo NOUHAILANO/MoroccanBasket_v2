@@ -73,7 +73,7 @@
                         {{ $product->category->nom ?? 'Non classé' }}
                     </td>
                     <td style="padding: 20px; font-weight: bold; color: #1a1a1a;">
-                        {{ number_format($product->prix, 2) }} DH
+                        {{ number_format($product->price, 2) }} DH
                     </td>
                     <td style="padding: 20px;">
                         @php

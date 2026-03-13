@@ -19,7 +19,7 @@ class DashboardController extends Controller
         $stockFaible = Product::with('category')->where('stock', '<=', 5)->get(); 
         
         // Calcul de la valeur monétaire du stock
-        $valeurStock = Product::select(DB::raw('SUM(prix * stock) as total'))->first()->total ?? 0;
+        $valeurStock = Product::select(DB::raw('SUM(price * stock) as total'))->first()->total ?? 0;
 
         return view('admin.dashboard', [
             'totalProduits'   => $totalProduits,

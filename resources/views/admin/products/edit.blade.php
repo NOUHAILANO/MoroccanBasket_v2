@@ -30,7 +30,7 @@
         <div style="display: flex; gap: 20px; margin-bottom: 20px;">
             <div style="flex: 1;">
                 <label style="display: block; margin-bottom: 8px; font-weight: 600;">Prix (DH) :</label>
-                <input type="number" step="0.01" name="prix" value="{{ old('prix', $product->prix) }}" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px;">
+                <input type="number" step="0.01" name="price" value="{{ old('price', $product->price) }}" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px;">
             </div>
             <div style="flex: 1;">
                 <label style="display: block; margin-bottom: 8px; font-weight: 600;">Stock :</label>
