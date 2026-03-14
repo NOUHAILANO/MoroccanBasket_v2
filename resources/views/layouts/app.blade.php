@@ -79,10 +79,25 @@
     <nav>
         <a href="{{ route('shop.index') }}" class="logo">MOROCCAN BASKET</a>
         <div class="nav-links">
+            <div class="auth-links">
+            @if (Route::has('login'))
+                @auth
+                <a href="{{ url('/admin/dashboard') }}">Dashboard</a>
+                @else
+                <a href="{{ route('login') }}">Se connecter</a>
+                @endauth
+            </div>
+            @endif
             <a href="{{ route('shop.index') }}">Boutique</a>
             <a href="{{ url('/cart') }}">
                 🛒 Panier <span class="cart-badge" style="background: #b58d67; color: white; border-radius: 50%; padding: 2px 8px; font-size: 12px; margin-left: 5px;">{{ count(session('cart', [])) }}</span>
             </a>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="text-red-500 hover:text-red-700">
+                    {{ __('Se déconnecter') }}
+                </button>
+            </form>
         </div>
     </nav>
 
