@@ -71,35 +71,60 @@
             max-width: 1100px;
             margin: 20px auto;
         }
+
+        .pagination .page-link {
+            color: #1a1a1a;
+            border: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .pagination .page-item.active .page-link {
+            background-color: #b58d67 !important;
+            border-color: #b58d67 !important;
+            color: white;
+        }
     </style>
 </head>
 
 <body>
 
-    <nav>
-        <a href="{{ route('shop.index') }}" class="logo">MOROCCAN BASKET</a>
-        <div class="nav-links">
-            <div class="auth-links">
+    <nav style="display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; background: #fff; border-bottom: 1px solid #eee; font-family: 'Playfair Display', serif;">
+    
+    <a href="{{ route('shop.index') }}" style="font-size: 24px; font-weight: bold; color: #1a1a1a; text-decoration: none; letter-spacing: 2px;">
+        MOROCCAN BASKET
+    </a>
+
+    <div style="display: flex; align-items: center; gap: 30px; font-family: 'Poppins', sans-serif; text-transform: uppercase; font-size: 13px; font-weight: 600;">
+        
+        <div style="display: flex; gap: 20px; align-items: center;">
             @if (Route::has('login'))
                 @auth
-                <a href="{{ url('/admin/dashboard') }}">Dashboard</a>
+                    <a href="{{ url('/admin/dashboard') }}" style="text-decoration: none; color: #333;">Dashboard</a>
+                    <form method="POST" action="{{ route('logout') }}" style="margin: 0;">
+                        @csrf
+                        <button type="submit" style="color: #e3342f; background: none; border: none; cursor: pointer; text-transform: uppercase; font-weight: 600; font-size: 13px;">
+                            {{ __('Se déconnecter') }}
+                        </button>
+                    </form>
                 @else
-                <a href="{{ route('login') }}">Se connecter</a>
+                    <a href="{{ route('login') }}" style="text-decoration: none; color: #333;">SE CONNECTER</a>
+                    @if (Route::has('register'))
+                        <a href="{{ route('register') }}" style="text-decoration: none; color: #333;">S'INSCRIRE</a>
+                    @endif
                 @endauth
-            </div>
             @endif
-            <a href="{{ route('shop.index') }}">Boutique</a>
-            <a href="{{ url('/cart') }}">
-                🛒 Panier <span class="cart-badge" style="background: #b58d67; color: white; border-radius: 50%; padding: 2px 8px; font-size: 12px; margin-left: 5px;">{{ count(session('cart', [])) }}</span>
-            </a>
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit" class="text-red-500 hover:text-red-700">
-                    {{ __('Se déconnecter') }}
-                </button>
-            </form>
         </div>
-    </nav>
+
+        <a href="{{ route('shop.index') }}" style="text-decoration: none; color: #333;">BOUTIQUE</a>
+        
+        <a href="{{ url('/cart') }}" style="text-decoration: none; color: #333; display: flex; align-items: center;">
+            🛒 PANIER 
+            <span style="background: #b58d67; color: white; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 11px; margin-left: 8px;">
+                {{ count(session('cart', [])) }}
+            </span>
+        </a>
+    </div>
+</nav>
 
     @if(session('success'))
     <div class="success-msg">{{ session('success') }}</div>

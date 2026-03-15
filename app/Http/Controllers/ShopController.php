@@ -2,17 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ShopController extends Controller
 {
     // Page d'accueil de la boutique
-    public function index()
-    {
-        $products = Product::all();
-        return view('shop.index', compact('products'));
+    public function index(Request $request)
+{
+    $query = Product::query();
+
+    // 1. Filtering by Category
+    if ($request->has('category') && $request->category != '') {
+        $query->where('category_id', $request->category);
     }
+
+    // 2. Pagination (6 products per page)
+    $products = $query->with('category')->paginate(6);
+    $categories = Category::all();
+
+        return view('shop.index', compact('products', 'categories'));
+}
 
     // Détails d'un produit
     public function show($id)

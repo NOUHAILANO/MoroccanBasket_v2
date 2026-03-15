@@ -42,8 +42,7 @@ class OrderController extends Controller
                     'price' => $details['price'],
                 ]);
 
-                // --- LOGIQUE MÉTIER IMPORTANTE ---
-                // Décrémenter le stock dans la table des produits (Gérée par Dev A)
+                
                 $product = Product::find($id);
                 $product->decrement('stock', $details['quantity']);
             }

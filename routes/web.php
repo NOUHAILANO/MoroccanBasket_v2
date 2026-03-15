@@ -32,7 +32,7 @@ Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.
 Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::resource('products', ProductController::class);
-    
+
     // Route pour enregistrer la commande en BDD
     Route::post('/order/store', [OrderController::class, 'store'])->name('order.store');
     //Route::middleware('auth')->group(function () {
