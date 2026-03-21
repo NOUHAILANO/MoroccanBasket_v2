@@ -28,13 +28,13 @@ Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.
 */
 Route::middleware('auth')->group(function () {
     // PROTECT THESE: Only logged-in users should place orders
-    Route::post('/orders/checkout', [OrderController::class, 'checkout'])->name('orders.checkout');
+    Route::get('/store', [OrderController::class, 'store'])->name('order.store');
+    Route::get('/checkout', [OrderController::class, 'checkout'])->name('order.checkout');
     
-    Route::get('/orders/confirmation', function () {
+    Route::get('/confirmation', function () {
         return view('orders.confirmation');
     })->name('confirmation');
 
-    // Profile management
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

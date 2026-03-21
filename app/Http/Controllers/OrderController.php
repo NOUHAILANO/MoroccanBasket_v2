@@ -33,12 +33,13 @@ class OrderController extends Controller
 
         // 2. Database Transaction (All or Nothing)
         try {
-            DB::transaction(function () use ($cart, $request) {
+            $reference = 'MB-' . strtoupper(Str::random(10));
+            DB::transaction(function () use ($cart, $reference, $request) {
 
                 // Create the Order
                 $order = Order::create([
                     'user_id' => Auth::id(),
-                    'reference' => 'MB-' . strtoupper(Str::random(10)), // Moroccan Basket prefix
+                    'reference' => $reference,
                     'total_amount' => $this->calculateTotal($cart),
                     'status' => 'pending',
                     'shipping_address' => $request->address,
@@ -48,6 +49,14 @@ class OrderController extends Controller
 
                 // Create Order Items and Update Stock
                 foreach ($cart as $id => $details) {
+
+                    $product = Product::findOrFail($id);
+
+                    // --- AJOUT : Vérification du stock (Exigence Cahier des charges) ---
+                    if ($product->stock < $details['quantity']) {
+                        // On lance une exception pour annuler toute la transaction
+                        throw new \Exception("Stock insuffisant pour le produit: {$product->name}");
+                    }
                     OrderItem::create([
                         'order_id' => $order->id,
                         'product_id' => $id,
@@ -63,11 +72,13 @@ class OrderController extends Controller
 
             // 3. Clear Cart and Redirect
             session()->forget('cart');
-            return redirect()->route('confirmation')->with('success', 'Order placed successfully!');
+            return redirect()->route('order.confirmation')->with('ref', $reference);
+
         } catch (\Exception $e) {
             return back()->with('error', 'Something went wrong: ' . $e->getMessage());
         }
     }
+
 
     /**
      * Calculate cart total helper
@@ -80,6 +91,10 @@ class OrderController extends Controller
     }
     public function checkout()
     {
-        return view('orders.checkout');
+        return view('order.checkout');
+    }
+    public function merci()
+    {
+        return view('order.confirmation');
     }
 }

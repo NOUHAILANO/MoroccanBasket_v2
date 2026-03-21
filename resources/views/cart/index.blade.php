@@ -34,7 +34,7 @@
             <div style="margin-top: 30px; text-align: right;">
                 <h3 style="color: #2c3e50;">Total : {{ number_format($total, 2) }} DH</h3>
                 
-                <form action="{{ route('orders.checkout') }}" method="POST" style="margin-top: 20px;">
+                <form action="{{ route('orders.checkout') }}" style="margin-top: 20px;">
                     @csrf
                     <button type="submit" style="background: #1a1a1a; color: white; padding: 15px 40px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: 0.3s;"
                             onmouseover="this.style.background='#b58d67'" onmouseout="this.style.background='#1a1a1a'">
