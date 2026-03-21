@@ -5,7 +5,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ShopController;
-use App\Http\Controllers\OrderController; 
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 | 1. PARTIE PUBLIQUE (Vitrine)
 |--------------------------------------------------------------------------
 */
+
 Route::get('/', [ShopController::class, 'index'])->name('shop.index');
 Route::get('/product/{id}', [ShopController::class, 'show'])->name('shop.show');
 
@@ -27,14 +28,15 @@ Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.
 |--------------------------------------------------------------------------
 */
 Route::middleware('auth')->group(function () {
-    // PROTECT THESE: Only logged-in users should place orders
-    Route::get('/store', [OrderController::class, 'store'])->name('order.store');
-    Route::get('/checkout', [OrderController::class, 'checkout'])->name('order.checkout');
     
-    Route::get('/confirmation', function () {
-        return view('orders.confirmation');
-    })->name('confirmation');
+    Route::get('/checkout', [OrderController::class, 'checkout'])->name('order.checkout');
+    Route::post('/store', [OrderController::class, 'store'])->name('order.store');
 
+    Route::get('/merci', function () {
+        return view('order.confirmation');
+    })->name('order.confirmation');
+
+    // Profile management
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

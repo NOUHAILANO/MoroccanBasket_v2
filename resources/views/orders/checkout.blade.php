@@ -7,7 +7,7 @@
         <div class="w-12 h-0.5 bg-[#b58d67] mx-auto mt-3"></div>
     </div>
 
-    <form action="{{ route('orders.confirmation') }}" class="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+    <form action="{{ route('order.store') }}" method="POST" class="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
         @csrf
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 font-sans">
@@ -36,6 +36,7 @@
             </div>
         </div>
 
+        <form action="{{route('order.confirmation')}}" ></form>
         <button type="submit" 
             class="w-full mt-10 bg-gray-900 text-white py-4 rounded-lg font-bold tracking-wide hover:bg-[#b58d67] transition-colors duration-300 uppercase shadow-lg">
             Valider la Commande

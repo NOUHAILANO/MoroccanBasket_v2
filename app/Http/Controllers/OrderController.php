@@ -72,7 +72,7 @@ class OrderController extends Controller
 
             // 3. Clear Cart and Redirect
             session()->forget('cart');
-            return redirect()->route('order.confirmation')->with('ref', $reference);
+            return redirect()->route('orders.confirmation')->with('ref', $reference);
 
         } catch (\Exception $e) {
             return back()->with('error', 'Something went wrong: ' . $e->getMessage());
@@ -89,12 +89,10 @@ class OrderController extends Controller
             return $carry + ($item['price'] * $item['quantity']);
         }, 0);
     }
-    public function checkout()
-    {
-        return view('order.checkout');
-    }
-    public function merci()
-    {
-        return view('order.confirmation');
-    }
+    public function checkout() {
+    return view('orders.checkout'); 
+}
+public function merci() {
+    return view('orders.confirmation'); 
+}
 }
