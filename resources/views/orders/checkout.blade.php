@@ -36,7 +36,6 @@
             </div>
         </div>
 
-        <form action="{{route('order.confirmation')}}" ></form>
         <button type="submit" 
             class="w-full mt-10 bg-gray-900 text-white py-4 rounded-lg font-bold tracking-wide hover:bg-[#b58d67] transition-colors duration-300 uppercase shadow-lg">
             Valider la Commande

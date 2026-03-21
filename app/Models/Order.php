@@ -10,7 +10,10 @@ class Order extends Model
         'user_id',
         'reference',
         'total_amount',
-        'status'
+        'status',
+        'shipping_address',
+        'city',
+        'phone'
     ];
     public function items()
     {

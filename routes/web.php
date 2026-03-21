@@ -28,14 +28,11 @@ Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.
 |--------------------------------------------------------------------------
 */
 Route::middleware('auth')->group(function () {
-    
+
     Route::get('/checkout', [OrderController::class, 'checkout'])->name('order.checkout');
     Route::post('/store', [OrderController::class, 'store'])->name('order.store');
 
-    Route::get('/merci', function () {
-        return view('order.confirmation');
-    })->name('order.confirmation');
-
+    Route::get('/merci', [OrderController::class, 'merci'])->name('order.confirmation');
     // Profile management
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

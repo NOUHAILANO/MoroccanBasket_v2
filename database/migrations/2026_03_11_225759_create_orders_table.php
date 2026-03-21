@@ -11,10 +11,14 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->decimal('total_amount', 10, 2);
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('reference', 50)->unique();
+            $table->decimal('total_amount', 10, 2);
             $table->enum('status', ['en_attente', 'expediee', 'livree', 'annulee'])->default('en_attente');
+            $table->string('name');
+            $table->text('shipping_address');
+            $table->string('city');
+            $table->string('phone');
             $table->timestamps();
         });
     }

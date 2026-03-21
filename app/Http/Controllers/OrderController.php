@@ -32,51 +32,47 @@ class OrderController extends Controller
         }
 
         // 2. Database Transaction (All or Nothing)
-        try {
-            $reference = 'MB-' . strtoupper(Str::random(10));
-            DB::transaction(function () use ($cart, $reference, $request) {
 
-                // Create the Order
-                $order = Order::create([
-                    'user_id' => Auth::id(),
-                    'reference' => $reference,
-                    'total_amount' => $this->calculateTotal($cart),
-                    'status' => 'pending',
-                    'shipping_address' => $request->address,
-                    'city' => $request->city,
-                    'phone' => $request->phone,
+        $reference = 'MB-' . strtoupper(Str::random(10));
+        DB::transaction(function () use ($cart, $reference, $request) {
+
+            // Create the Order
+            $order = Order::create([
+                'user_id' => Auth::id(),
+                'reference' => $reference,
+                'total_amount' => $this->calculateTotal($cart),
+                'status' => 'en attente',
+                'shipping_address' => $request->address,
+                'city' => $request->city,
+                'phone' => $request->phone,
+            ]);
+
+            // Create Order Items and Update Stock
+            foreach ($cart as $id => $details) {
+
+                $product = Product::findOrFail($id);
+
+                // --- AJOUT : Vérification du stock (Exigence Cahier des charges) ---
+                if ($product->stock < $details['quantity']) {
+                    // On lance une exception pour annuler toute la transaction
+                    throw new \Exception("Stock insuffisant pour le produit: {$product->name}");
+                }
+                OrderItem::create([
+                    'order_id' => $order->id,
+                    'product_id' => $id,
+                    'quantity' => $details['quantity'],
+                    'price' => $details['price'],
                 ]);
 
-                // Create Order Items and Update Stock
-                foreach ($cart as $id => $details) {
+                // Update product stock
+                $product = Product::findOrFail($id);
+                $product->decrement('stock', $details['quantity']);
+            }
+        });
 
-                    $product = Product::findOrFail($id);
-
-                    // --- AJOUT : Vérification du stock (Exigence Cahier des charges) ---
-                    if ($product->stock < $details['quantity']) {
-                        // On lance une exception pour annuler toute la transaction
-                        throw new \Exception("Stock insuffisant pour le produit: {$product->name}");
-                    }
-                    OrderItem::create([
-                        'order_id' => $order->id,
-                        'product_id' => $id,
-                        'quantity' => $details['quantity'],
-                        'price' => $details['price'],
-                    ]);
-
-                    // Update product stock
-                    $product = Product::findOrFail($id);
-                    $product->decrement('stock', $details['quantity']);
-                }
-            });
-
-            // 3. Clear Cart and Redirect
-            session()->forget('cart');
-            return redirect()->route('orders.confirmation')->with('ref', $reference);
-
-        } catch (\Exception $e) {
-            return back()->with('error', 'Something went wrong: ' . $e->getMessage());
-        }
+        // 3. Clear Cart and Redirect
+        session()->forget('cart');
+        return redirect()->route('order.confirmation')->with('ref', $reference)->with('success', 'Commande réussie !');
     }
 
 
@@ -89,10 +85,12 @@ class OrderController extends Controller
             return $carry + ($item['price'] * $item['quantity']);
         }, 0);
     }
-    public function checkout() {
-    return view('orders.checkout'); 
-}
-public function merci() {
-    return view('orders.confirmation'); 
-}
+    public function checkout()
+    {
+        return view('orders.checkout');
+    }
+    public function merci()
+    {
+        return view('orders.confirmation');
+    }
 }
