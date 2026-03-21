@@ -1,20 +1,13 @@
-@extends('layouts.app')
+@extends('layouts.app') 
+@section('content') 
+<div class="text-center py-20">
+    <h1 class="text-3xl font-serif mb-4">MERCI POUR VOTRE COMMANDE !</h1>
+    
+    @if(session('success'))
+        <p class="text-green-600 mb-4">{{ session('success') }}</p>
+    @endif
 
-@section('content')
-<div class="min-h-[60vh] flex items-center justify-center px-6 font-serif">
-    <div class="text-center max-w-lg">
-        <h1 class="text-4xl text-[#b58d67] font-bold mb-6">MERCI POUR VOTRE COMMANDE !</h1>
-        <p class="text-lg text-gray-600 leading-relaxed font-sans italic">
-            Votre commande a été enregistrée avec succès. <br>
-            Nous préparons vos produits artisanaux avec le plus grand soin.
-        </p>
-        
-        <div class="mt-10">
-            <a href="{{ route('shop.index') }}" 
-                class="inline-block bg-gray-900 text-white px-8 py-3 rounded-md font-semibold font-sans hover:bg-[#b58d67] transition-all duration-300 uppercase tracking-tighter">
-                Retourner à la boutique
-            </a>
-        </div>
-    </div>
+    <p class="mb-8">Votre commande a été enregistrée avec succès. Nous préparons vos produits artisanaux avec le plus grand soin.</p>
+    <a href="{{ route('shop.index') }}" class="underline tracking-widest uppercase text-sm">Retourner à la boutique</a>
 </div>
 @endsection

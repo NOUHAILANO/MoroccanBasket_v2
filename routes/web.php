@@ -28,9 +28,9 @@ Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.
 */
 Route::middleware('auth')->group(function () {
     // PROTECT THESE: Only logged-in users should place orders
-    Route::post('/order/store', [OrderController::class, 'store'])->name('order.store');
+    Route::post('/orders/checkout', [OrderController::class, 'checkout'])->name('orders.checkout');
     
-    Route::get('/order/confirmation', function () {
+    Route::get('/orders/confirmation', function () {
         return view('orders.confirmation');
     })->name('confirmation');
 

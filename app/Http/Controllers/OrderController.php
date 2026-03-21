@@ -2,34 +2,36 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class OrderController extends Controller
 {
-    // Valider et enregistrer la commande
+    /**
+     * Store a newly created order in storage.
+     */
     public function store(Request $request)
     {
-
+        // 1. Validate Shipping Info
         $request->validate([
             'name' => 'required|string|max:255',
             'address' => 'required|string',
             'city' => 'required|string',
             'phone' => 'required|string',
         ]);
-        // 1. Récupérer le panier (stocké en session par exemple)
+
         $cart = session()->get('cart', []);
 
         if (empty($cart)) {
-            return redirect()->route('shop.index')->with('error', 'Panier vide');
+            return redirect()->route('shop.index')->with('error', 'Your cart is empty.');
         }
 
-        // 2. Utiliser une transaction pour s'assurer que tout s'enregistre bien
+        // 2. Database Transaction (All or Nothing)
         try {
             DB::transaction(function () use ($cart, $request) {
 
@@ -67,12 +69,17 @@ class OrderController extends Controller
         }
     }
 
+    /**
+     * Calculate cart total helper
+     */
     private function calculateTotal($cart)
     {
-        $total = 0;
-        foreach ($cart as $item) {
-            $total += $item['price'] * $item['quantity'];
-        }
-        return $total;
+        return array_reduce($cart, function ($carry, $item) {
+            return $carry + ($item['price'] * $item['quantity']);
+        }, 0);
+    }
+    public function checkout()
+    {
+        return view('orders.checkout');
     }
 }
