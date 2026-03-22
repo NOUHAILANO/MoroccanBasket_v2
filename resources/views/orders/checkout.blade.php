@@ -1,82 +1,72 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="max-w-6xl mx-auto my-10 px-6 font-serif">
+<div style="max-width: 1200px; margin: 0 auto; padding: 40px 20px; font-family: 'Playfair Display', serif;">
     
-    <div class="text-center mb-10">
-        <h2 class="text-3xl font-bold text-gray-800 tracking-widest uppercase">Checkout</h2>
-        <div class="w-12 h-0.5 bg-[#b58d67] mx-auto mt-3"></div>
+    <div style="text-align: center; margin-bottom: 60px;">
+        <h1 style="font-size: 42px; color: #2c3e50; margin-bottom: 10px; letter-spacing: 2px; text-transform: uppercase;">Finaliser la commande</h1>
+        <div style="width: 80px; height: 2px; background: #b58d67; margin: 20px auto;"></div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+    <div style="display: grid; grid-template-columns: 1fr 400px; gap: 40px; align-items: start;">
         
-        <div class="lg:col-span-2">
-            <form action="{{ route('order.store') }}" method="POST" class="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
-                @csrf
-                <h3 class="font-sans text-lg font-bold mb-6 text-gray-700 uppercase">Informations de livraison</h3>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 font-sans">
-                    <div class="md:col-span-1">
-                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-2">Nom Complet</label>
-                        <input type="text" name="name" required 
-                            class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#b58d67] focus:border-transparent outline-none transition shadow-sm">
-                    </div>
-
-                    <div class="md:col-span-1">
-                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-2">Email</label>
-                        <input type="email" name="email" required 
-                            class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#b58d67] focus:border-transparent outline-none transition shadow-sm">
-                    </div>
-
-                    <div class="md:col-span-2">
-                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-2">Adresse de Livraison</label>
-                        <input type="text" name="address" required 
-                            class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#b58d67] focus:border-transparent outline-none transition shadow-sm">
-                    </div>
-
-                    <div class="col-span-1">
-                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-2">Ville</label>
-                        <input type="text" name="city" required 
-                            class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#b58d67] focus:border-transparent outline-none transition shadow-sm">
-                    </div>
-
-                    <div class="col-span-1">
-                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-2">Téléphone</label>
-                        <input type="tel" name="phone" required 
-                            class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#b58d67] focus:border-transparent outline-none transition shadow-sm">
-                    </div>
-                </div>
-
-                <button type="submit" 
-                    class="w-full mt-10 bg-gray-900 text-white py-4 rounded-lg font-bold tracking-wide hover:bg-[#b58d67] transition-colors duration-300 uppercase shadow-lg">
-                    Valider la Commande
-                </button>
-            </form>
-        </div>
-
-        <div class="bg-gray-50 p-8 rounded-xl border border-gray-200 h-fit font-sans shadow-sm">
-            <h3 class="text-lg font-bold text-gray-800 uppercase mb-6 border-b pb-3 border-gray-200">Résumé de la commande</h3>
+        <form action="{{ route('order.store') }}" method="POST" 
+              style="background: white; padding: 40px; border-radius: 12px; border: 1px solid #eee; box-shadow: 0 10px 20px rgba(0,0,0,0.05); font-family: 'Poppins', sans-serif;">
+            @csrf
             
+            <h3 style="font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 30px; color: #1a1a1a;">Informations de Livraison</h3>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div style="grid-column: span 2;">
+                    <label style="display: block; font-size: 13px; color: #888; margin-bottom: 8px; text-transform: uppercase;">Nom Complet</label>
+                    <input type="text" name="name" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                </div>
+
+                <div style="grid-column: span 2;">
+                    <label style="display: block; font-size: 13px; color: #888; margin-bottom: 8px; text-transform: uppercase;">Adresse Email</label>
+                    <input type="email" name="email" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                </div>
+
+                <div style="grid-column: span 2;">
+                    <label style="display: block; font-size: 13px; color: #888; margin-bottom: 8px; text-transform: uppercase;">Adresse de Livraison</label>
+                    <input type="text" name="address" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                </div>
+
+                <div>
+                    <label style="display: block; font-size: 13px; color: #888; margin-bottom: 8px; text-transform: uppercase;">Ville</label>
+                    <input type="text" name="city" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                </div>
+
+                <div>
+                    <label style="display: block; font-size: 13px; color: #888; margin-bottom: 8px; text-transform: uppercase;">Téléphone</label>
+                    <input type="tel" name="phone" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                </div>
+            </div>
+
+            <button type="submit" 
+                style="width: 100%; margin-top: 40px; background: #1a1a1a; color: white; border: none; padding: 18px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s; letter-spacing: 1px;"
+                onmouseover="this.style.background='#b58d67'" onmouseout="this.style.background='#1a1a1a'">
+                CONFIRMER LE PAIEMENT
+            </button>
+        </form>
+
+        <div style="background: #fdfbf9; padding: 30px; border-radius: 12px; border: 1px solid #eaddcf; font-family: 'Poppins', sans-serif;">
+            <h3 style="font-family: 'Playfair Display', serif; font-size: 20px; margin-bottom: 20px;">Votre Panier</h3>
+            @php $total = 0; @endphp
             @if(session('cart'))
-                <div class="space-y-4 mb-6">
-                    @php $total = 0; @endphp
-                    @foreach(session('cart') as $id => $details)
-                        @php $total += $details['price'] * $details['quantity']; @endphp
-                        <div class="flex justify-between text-sm">
-                            <span class="text-gray-600">{{ $details['name'] }} <span class="text-xs text-gray-400">(x{{ $details['quantity'] }})</span></span>
-                            <span class="font-semibold text-gray-800">{{ number_format($details['price'] * $details['quantity'], 2) }} DH</span>
-                        </div>
-                    @endforeach
+                @foreach(session('cart') as $id => $details)
+                    @php $total += $details['price'] * $details['quantity'] @endphp
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 14px;">
+                        <span>{{ $details['name'] }} (x{{ $details['quantity'] }})</span>
+                        <span style="font-weight: 600;">{{ number_format($details['price'] * $details['quantity'], 2) }} DH</span>
+                    </div>
+                @endforeach
+                <div style="border-t: 1px solid #eaddcf; margin-top: 20px; pt: 20px; display: flex; justify-content: space-between; font-weight: bold; font-size: 18px; color: #b58d67;">
+                    <span>Total</span>
+                    <span>{{ number_format($total, 2) }} DH</span>
                 </div>
-                <div class="border-t border-gray-200 pt-4 flex justify-between items-center">
-                    <span class="text-gray-900 uppercase tracking-wider text-sm font-bold">Total</span>
-                    <span class="text-2xl font-bold text-[#b58d67]">{{ number_format($total, 2) }} DH</span>
-                </div>
-            @else
-                <p class="text-gray-500 text-sm italic">Votre panier est vide.</p>
             @endif
         </div>
-
     </div>
 </div>
 @endsection
