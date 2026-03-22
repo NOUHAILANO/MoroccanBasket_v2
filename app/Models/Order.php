@@ -11,6 +11,7 @@ class Order extends Model
         'reference',
         'total_amount',
         'status',
+        'name',
         'shipping_address',
         'city',
         'phone'

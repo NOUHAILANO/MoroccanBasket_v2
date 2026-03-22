@@ -38,13 +38,14 @@ class OrderController extends Controller
 
             // Create the Order
             $order = Order::create([
-                'user_id' => Auth::id(),
-                'reference' => $reference,
-                'total_amount' => $this->calculateTotal($cart),
-                'status' => 'en attente',
-                'shipping_address' => $request->address,
-                'city' => $request->city,
-                'phone' => $request->phone,
+                'user_id'          => Auth::id(),
+                'reference'         => $reference,
+                'total_amount'      => $this->calculateTotal($cart),
+                'status'            => 'en_attente',
+                'name'              => $request->name,
+                'shipping_address'  => $request->address,
+                'city'              => $request->city,
+                'phone'             => $request->phone,
             ]);
 
             // Create Order Items and Update Stock
