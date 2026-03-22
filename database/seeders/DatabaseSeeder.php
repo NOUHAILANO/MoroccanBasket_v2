@@ -17,8 +17,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // 1. Create Categories
-
         $artisanat = Category::firstOrCreate(
             ['nom' => 'Artisanat'],
             ['slug' => Str::slug('Artisanat')]
@@ -27,6 +25,10 @@ class DatabaseSeeder extends Seeder
         $soins = Category::firstOrCreate(
             ['nom' => 'Soins Naturels'],
             ['slug' => Str::slug('Soins Naturels')]
+        );
+        $table = Category::firstOrCreate(
+            ['nom' => 'Art de la Table'],
+            ['slug' => Str::slug('Art de la Table')]
         );
         $this->command->info('Categories created successfully!');
 

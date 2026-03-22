@@ -83,10 +83,9 @@
 
             <div style="height: 300px; overflow: hidden; position: relative;">
 
-                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->nom }}"
 
-                    style="width: 100%; height: 100%; object-fit: cover;">
-
+                <img src="{{ Str::startsWith($product->image, 'http') ? $product->image : asset('storage/' . $product->image) }}"
+                    alt="{{ $product->nom }}" style="width: 100%; height: 100%; object-fit: cover;">
 
 
 
