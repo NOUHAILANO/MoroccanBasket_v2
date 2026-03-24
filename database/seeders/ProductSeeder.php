@@ -20,7 +20,7 @@ class ProductSeeder extends Seeder
         // Get Category IDs to link products
         $artisanat = \App\Models\Category::where('nom', 'Artisanat')->first();
         $soins = \App\Models\Category::where('nom', 'Soins Naturels')->first();
-        $table= \App\Models\Category::where('nom', 'Art de la Table')->first();
+        $table = \App\Models\Category::where('nom', 'Art de la Table')->first();
 
 
         // Check if categories exist to avoid errors
@@ -135,7 +135,7 @@ class ProductSeeder extends Seeder
                 'nom' => 'Ghassoul Clay Mask',
                 'description' => 'Traditional Atlas mountain clay for hair and body purification.',
                 'price' => 75,
-                'image' => 'https://images.unsplash.com/photo-1596755389378-c31d21fd1273?q=80&w=800',
+                'image' => 'products/gh_clay.jpg',
                 'category_id' => $soins->id,
                 'stock' => 40,
             ],
@@ -143,7 +143,7 @@ class ProductSeeder extends Seeder
                 'nom' => 'Leather Pouf Tan',
                 'description' => 'Hand-stitched genuine leather pouf from the tanneries of Fez.',
                 'price' => 450,
-                'image' => 'https://images.unsplash.com/photo-1505693314120-0d443867891c?q=80&w=800',
+                'image' => 'products/poof.jpg',
                 'category_id' => $artisanat->id,
                 'stock' => 3,
             ],
@@ -153,7 +153,7 @@ class ProductSeeder extends Seeder
                 'nom' => 'Beldi Glass Set',
                 'description' => 'Set of 6 hand-blown recycled glasses with a signature blue tint.',
                 'price' => 120,
-                'image' => 'https://images.unsplash.com/photo-1512411513543-16f500057404?q=80&w=800',
+                'image' => 'products/glass_set.jpg',
                 'category_id' => $table->id,
                 'stock' => 15,
             ],
@@ -161,7 +161,7 @@ class ProductSeeder extends Seeder
                 'nom' => 'Woven Bread Basket',
                 'description' => 'Hand-woven palm leaf basket for serving traditional bread.',
                 'price' => 55,
-                'image' => 'https://images.unsplash.com/photo-1590650153855-d9e808231d41?q=80&w=800',
+                'image' => 'products/baskets.jpg',
                 'category_id' => $table->id,
                 'stock' => 20,
             ],
@@ -169,7 +169,7 @@ class ProductSeeder extends Seeder
                 'nom' => 'Hand-Carved Wooden Spoon',
                 'description' => 'Lemon wood spoon, perfect for stirring honey or tagines.',
                 'price' => 30,
-                'image' => 'https://images.unsplash.com/photo-1584346133934-a3afd2a33c4c?q=80&w=800',
+                'image' => 'products/w_spoon.jpg',
                 'category_id' => $table->id,
                 'stock' => 50,
             ],
@@ -177,7 +177,7 @@ class ProductSeeder extends Seeder
                 'nom' => 'Engraved Brass Tray',
                 'description' => 'Luxurious polished brass tray for a royal tea ceremony.',
                 'price' => 290,
-                'image' => 'https://images.unsplash.com/photo-1578318817290-27694f8396c0?q=80&w=800',
+                'image' => 'products/b_tray.jpg',
                 'category_id' => $table->id,
                 'stock' => 6,
             ],
