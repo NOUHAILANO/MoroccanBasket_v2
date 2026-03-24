@@ -151,7 +151,7 @@ class ProductSeeder extends Seeder
             // --- ART DE LA TABLE (Nouvelle Catégorie) ---
             [
                 'nom' => 'Beldi Glass Set',
-                'description' => 'Set of 6 hand-blown recycled glasses with a signature blue tint.',
+                'description' => 'Set of 12 hand-blown recycled glasses with a signature gold tint.',
                 'price' => 120,
                 'image' => 'products/glass_set.jpg',
                 'category_id' => $table->id,
