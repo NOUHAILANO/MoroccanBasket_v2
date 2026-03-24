@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -49,8 +50,11 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
     Route::resource('products', ProductController::class);
 
     // Order management for Admin
-    Route::get('/orders', [OrderController::class, 'index'])->name('admin.orders.index');
-    Route::patch('/orders/{order}/status', [OrderController::class, 'updateStatus'])->name('admin.orders.status');
+    Route::get('/orders', [DashboardController::class, 'ordersIndex'])->name('admin.orders.index');
+    Route::get('/orders/{order}', [DashboardController::class, 'ordersShow'])->name('admin.orders.show');
+    Route::patch('/orders/{order}/status', [DashboardController::class, 'updateStatus'])->name('admin.orders.updateStatus');
+
+    Route::resource('categories', CategoryController::class);
 });
 
 require __DIR__ . '/auth.php';
