@@ -60,7 +60,7 @@ class ProductSeeder extends Seeder
                 'nom' => 'Rose Water Mist',
                 'description' => 'Refreshing and soothing floral water from the Valley of Roses.',
                 'price' => 110,
-                'image' => 'products/eau_rose.jpg',
+                'image' => 'products/4XKwfzwIO5bHdINpVTxffEXaxRmWUcftfPubffPf.jpg',
                 'category_id' => $soins->id,
                 'stock' => 25,
             ],
