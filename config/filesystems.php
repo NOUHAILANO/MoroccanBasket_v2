@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DISK', 'local'),
+    'default' => env('FILESYSTEM_DISK', 's3'),  // ← Changé de 'local' à 's3'
 
     /*
     |--------------------------------------------------------------------------
@@ -47,15 +47,16 @@ return [
             'report' => false,
         ],
 
+        // MODIFIEZ CETTE SECTION S3 POUR CLOUDFLARE R2
         's3' => [
             'driver' => 's3',
-            'key' => env('AWS_ACCESS_KEY_ID'),
-            'secret' => env('AWS_SECRET_ACCESS_KEY'),
-            'region' => env('AWS_DEFAULT_REGION'),
-            'bucket' => env('AWS_BUCKET'),
-            'url' => env('AWS_URL'),
-            'endpoint' => env('AWS_ENDPOINT'),
-            'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
+            'key' => env('CLOUDFLARE_R2_ACCESS_KEY_ID'),      // ← Changé
+            'secret' => env('CLOUDFLARE_R2_SECRET_ACCESS_KEY'), // ← Changé
+            'region' => 'auto',                                // ← Changé
+            'bucket' => env('CLOUDFLARE_R2_BUCKET'),           // ← Changé
+            'url' => env('CLOUDFLARE_R2_URL'),                 // ← Changé
+            'endpoint' => env('CLOUDFLARE_R2_ENDPOINT'),       // ← Changé
+            'use_path_style_endpoint' => false,                // ← Changé
             'throw' => false,
             'report' => false,
         ],
