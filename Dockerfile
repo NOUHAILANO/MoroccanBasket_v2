@@ -1,42 +1,37 @@
-FROM php:8.2-cli
+FROM php:8.2-apache
 
-# Install system dependencies
+# Installer les dépendances système
 RUN apt-get update && apt-get install -y \
-    git \
-    curl \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    zip \
-    unzip \
-    npm \
-    nodejs \
-    libpq-dev
+    git curl libpng-dev libonig-dev libxml2-dev zip unzip \
+    npm nodejs libpq-dev
 
-# Install PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
-RUN docker-php-ext-install pdo_pgsql
+# Installer les extensions PHP
+RUN docker-php-ext-install pdo_mysql pdo_pgsql mbstring exif pcntl bcmath gd
 
-# Install Composer
+# Installer Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Set working directory
-WORKDIR /app
+# Activer mod_rewrite pour Apache
+RUN a2enmod rewrite
 
-# Copy application files
+# Définir le dossier de travail
+WORKDIR /var/www/html
+
+# Copier les fichiers du projet
 COPY . .
 
-# Install PHP dependencies
+# Installer les dépendances PHP
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# Install Node dependencies and build frontend
+# Installer les dépendances Node.js et builder le frontend (Inertia + React)
 RUN npm install && npm run build
 
-# Set permissions
+# Donner les permissions
+RUN chown -R www-data:www-data storage bootstrap/cache
 RUN chmod -R 775 storage bootstrap/cache
 
-# Expose port
-EXPOSE 8000
+# Exposer le port 80
+EXPOSE 80
 
-# Start Laravel server
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+# Commande de démarrage
+CMD ["apache2-foreground"]
